@@ -26,7 +26,7 @@ Users can visualize and get notes of the song they provide by using this     end
 This module is the heart of the application. It tries to map the notes of the song generated to raga using supervised machine learning algorithms and ensemble learning. It then displays the raga to the user and saves it in the database with other details
 
 ### Frontend:
-The front end of the application leverages the Vue.js framework to utilize the advantages of JavaScript. The Vue.js fetches data from the frontend using apis and then displays the response using the mustache expressions
+The front end of the application leverages the Vue.js framework to utilize the advantages of JavaScript. The Vue.js fetches data using apis and then displays the response
 
 ### API endpoints have been created for the tasks mentioned
 
