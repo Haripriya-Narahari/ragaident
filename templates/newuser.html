@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <style>
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #f1f0f3;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgb(245, 243, 248), rgb(244, 245, 247));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+   /* background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))*/
+    }
+</style>
+<head>
+    
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <script src="https://unpkg.com/vue-router@3.5.3/dist/vue-router.js"></script>
+        <script src="https://unpkg.com/vuex@2.0.0/dist/vuex.js"></script>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        
+    
+</head>
+<div id="main" class="id">
+<section class="vh-200 gradient-custom">
+    <div class="container py-5 h-200">
+      <div class="row d-flex justify-content-center align-items-center h-200">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card bg-dark text-white" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center" id="app">
+  
+              <div class="mb-md-5 mt-md-4 pb-5">
+  
+                <h2 class="fw-bold mb-2 text-uppercase">Sign UP</h2>
+                <p class="text-white-50 mb-5">Sign Up save your musical findings</p>
+              
+                <div class="form-outline form-white mb-4">
+                  <input type="email" id="typeEmailX" class="form-control form-control-lg" v-model="username" required/>
+                  <label class="form-label" for="typeEmailX">Username</label>
+                </div>
+  
+                <div class="form-outline form-white mb-4">
+                  <input type="password" id="typePasswordX" class="form-control form-control-lg" v-model="password"/>
+                  <label class="form-label" for="typePasswordX" >Password</label>
+                </div>
+            
+                <div class="form-outline form-white mb-4">
+                    <input type="text" id="usertitle" class="form-control form-control-lg" v-model="usertitle"/>
+                    <label class="form-label" for="usertittle" >Email</label>
+                  </div>
+  
+                <button class="btn btn-outline-light btn-lg px-5"  v-on:click="addUser" type="submit">Signup</button>
+            
+                <div class="d-flex justify-content-center text-center mt-4 pt-1">
+                  <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                  <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                  <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
+                </div>
+  
+              </div>
+  
+              <div>
+                <p class="mb-0">Already have an account? <a href="/loginpage" class="text-white-50 fw-bold">Login</a>
+                </p>
+              </div>
+            
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+  </section>
+  </html>
+
+  <script>
+    new Vue({
+     el:'#app',
+     data:{
+       username:'',
+       password:'',
+       usertitle:'',
+
+     },
+     created(){
+       sessionStorage.clear()
+     },
+     
+     methods: {
+       addUser(){
+         fetch('http://localhost:5000/api/newuser', {
+               method: 'POST',
+               headers: {
+                 "Content-Type": "application/json", 
+                 'Access-Control-Allow-Origin': '*'
+               },
+               body:JSON.stringify({username:this.username, password:this.password, usertitle:this.usertitle})
+               
+           }).then(response => response.json()
+           ).then(data => {
+               window.location.href = '/'
+           })
+
+           
+     },
+   }
+ 
+ })
+</script>

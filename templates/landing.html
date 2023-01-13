@@ -1,0 +1,165 @@
+<html>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <script src="https://unpkg.com/vue-router@3.5.3/dist/vue-router.js"></script>
+        <script src="https://unpkg.com/vuex@2.0.0/dist/vuex.js"></script>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+        <!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">-->
+        <script src="https://cdn.jsdelivr.net/npm/vuetify@2.0.0/dist/vuetify.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+        <head>
+            <style>
+        .ml11 {
+            font-weight: 700;
+            font-size: 3.5em;
+          }
+          
+          .ml11 .text-wrapper {
+            position: absolute;
+            display: inline-block;
+            
+            padding-left: 6.5em;
+            padding-bottom: 0.15em;
+            color: rgba(8, 9, 87, 0.918);
+          }
+          
+          .ml11 .line {
+            opacity: 0;
+            position: relative;
+            left: 0;
+            height: 100%;
+            width: 3px;
+            background-color: rgba(26, 229, 243, 0.808);
+            transform-origin: 0 50%;
+          }
+          
+          .ml11 .line1 { 
+            top: 0; 
+            left: 0;
+          }
+          
+          .ml11 .letter {
+            display: inline-block;
+            line-height: 1em;
+          }
+
+          .ml11 .lettern {
+            display: inline-block;
+            line-height: 1em;
+            padding-left: 7em;
+          }
+
+          .button {
+  background-color: #040a46; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.button1 {
+  background-color: #040a46; 
+  color: white; 
+  border: 2px solid #040a46;
+  margin-left: 37em;
+  margin-top: 10em;
+  border-radius: 4px;
+}
+
+.button1:hover {
+  background-color: white;
+  color: #040a46;
+  
+}
+        </style>
+        </head>
+        <body>
+          
+          <img src="static/logo.jpeg"  style="margin-left:35em; padding-right: 5em;
+           width: 25%;" >
+        <h1 class="ml11">
+            <span class="text-wrapper">
+              <span class="line line1"></span>
+              <span class="letters">WELCOME TO RAGIDENT</span>
+              <hr style="border: top 2px;border-radius: 5px;">
+              <span class="lettern" style="font-size:large; left:7em">Raga Identification And Notes Generator for Songs</span>
+            </span>
+        </h1>
+        <div id="app">
+        <button v-on:click="loginn" class="button button1" >Let's Begin</button>
+      </div>
+    </body> 
+        <script>
+            var textWrapper = document.querySelector('.ml11 .letters');
+textWrapper.innerHTML = textWrapper.textContent.replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>");
+
+anime.timeline({})
+  .add({
+    targets: '.ml11 .line',
+    scaleY: [0,1],
+    opacity: [0.5,1],
+    easing: "easeOutExpo",
+    duration: 700
+  })
+  .add({
+    targets: '.ml11 .line',
+    translateX: [0, document.querySelector('.ml11 .letters').getBoundingClientRect().width + 10],
+    easing: "easeOutExpo",
+    duration: 700,
+    delay: 100
+  }).add({
+    targets: '.ml11 .letter',
+    opacity: [0,1],
+    easing: "easeOutExpo",
+    duration: 600,
+    offset: '-=775',
+    delay: (el, i) => 34 * (i+1)
+  }).add({
+    targets: '.ml11 .lettern',
+    opacity: [0,1],
+    easing: "easeOutExpo",
+    duration: 600,
+    offset: '-=775',
+    delay: (el, i) => 34 * (i+1)
+  })
+  .add({
+    targets: '.ml11',
+    opacity: 1,
+    duration: 1000,
+    easing: "easeOutExpo",
+    delay: 1000
+  });
+
+
+  new Vue({
+        el:'#app',
+        data:{
+          email:'',
+          password:'',
+  
+        },
+        created(){
+          sessionStorage.clear()
+        },
+        methods: {
+          loginn(){
+            
+                window.location.href = '/ragaidentify'
+          },
+        },
+    })
+        </script>  
+        </html>

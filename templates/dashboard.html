@@ -1,0 +1,173 @@
+<style>
+html,
+body,
+.intro {
+  height: 100%;
+}
+.card {
+  border-radius: .5rem;
+}
+.bg-image{
+background: -webkit-linear-gradient(to top, rgb(247, 246, 248), rgb(212, 227, 255));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to top, rgb(247, 246, 248), rgb(212, 227, 255))
+}
+.button {
+  background-color: #040a46; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.button1 {
+  background-color: #040a46; 
+  color: white; 
+  border: 2px solid #040a46;
+  margin-left: 37em;
+  margin-top: 10em;
+  border-radius: 4px;
+}
+
+.button1:hover {
+  background-color: white;
+  color: #040a46;
+  
+}
+</style>
+<head>
+    
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.5.3/dist/vue-router.js"></script>
+    <script src="https://unpkg.com/vuex@2.0.0/dist/vuex.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+
+</head>
+<div id="app">
+    
+    <section class="intro">
+        <div class="bg-image h-100" >
+          <div class="mask d-flex align-items-center h-100" style="background-color: rgb(236, 245, 247);">
+            <div class="container">
+                <h1 class="  text-dark text-center " >Dashboard</h1>
+                <br>
+                <br>
+                
+              <div class="row justify-content-center">
+                <div class="col-12">
+                  <div class="card">
+                    <div class="card-body">
+                        
+                      <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                          <thead>
+                            <tr>
+                              
+                              <th scope="col">Song Name</th>
+                              <th scope="col">Raga Name</th>
+                              <th scope="col">Date</th>
+                              <th scope="col">Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            
+                              <tr v-for="raga in ragas" >
+                                <td>[[ raga.song_name ]]</td>
+                                <td>[[ raga.r_name]]</td>
+                                <td>[[ raga.date]]</td>
+                                <td><button class="btn btn-danger" v-on:click="deleteRaga(raga,raga.uid)"> Delete </button></td>
+                          
+                            
+                            </tr>
+                            
+                              
+                          </tbody>
+                        </table>
+                        
+                      </div>
+                    </div>
+                    
+                  </div>
+                  <button v-on:click="signOut" class="button button1" >Sign Out</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+</div>
+
+  <script>
+  
+    new Vue( {
+        el:'#app',
+          data:{
+            username : '',
+              ragas: [],
+          },
+          delimiters: ['[[', ']]'],
+     name:"Dashboard",
+      
+        beforeMount(){
+    //         const user = sessionStorage.get("email")
+     this.username = sessionStorage.getItem("email");
+      
+      let at = sessionStorage.getItem("authToken")
+      
+           fetch('http://127.0.0.1:5000/api/raga/'+this.username, 
+          {
+                method: 'GET',
+                headers: {
+                  "Content-Type": "application/json", 
+          'Authentication-Token' : at,
+                },
+                
+            }).then(response => response.json()
+            ).then(data=> this.ragas =data)
+        },
+        methods:{
+            deleteRaga(raga,id){
+                let at = sessionStorage.getItem("authToken")
+              fetch('http://127.0.0.1:5000/api/raga/'+id+'/delete', {
+                    method: 'POST',
+                    headers: {
+                      "Content-Type": "application/json", 
+                      'Authentication-Token' : at,
+                    },
+                    body:JSON.stringify({uid:id,trackername:raga.r_name,username:raga.username})
+                    
+                    
+                }).then(response => response.json())
+                .then(data=> this.trackers =data);
+                window.location.reload();
+            },
+            signOut(){
+                window.location.href = '/'
+            }
+            
+            
+        }
+    
+    })
+    
+    </script>
+
+
+
