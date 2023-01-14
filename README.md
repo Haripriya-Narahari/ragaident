@@ -1,4 +1,4 @@
-# ragaident
+# RagaIdent
 Music plays a key role in the life of every living being. The last two decades has seen an exponential growth in the number and variety of songs created.
 In accordance to classical music notes and ragas are the lifeline of any song. For an artist to be able to do full justice to a song, the notes and ragas for every composition play a key role.
 Not all artists are gifted note and raga identifiers. Any artist would have to spend a valuable amount of time figuring the raga / notes of a song in order to be able to reproduce it.
@@ -55,6 +55,20 @@ The front end of the application leverages the Vue.js framework to utilize the a
 •	Thus when a new sample was sent for prediction, the sample was preprocessed in the above method and Raga was predicted.
 
 •	The notes generated in the process is also shared with the user.
+
+## Frameworks used
+
+•	Python – Flask : 	Flask-restful |	Flask-security
+  
+•	Python – Librosa
+
+•	Python – Scipy
+
+•	SQLAlchemy
+
+•	SQLite Database
+
+•	Vue.js
 
 ## Screenshots
 
