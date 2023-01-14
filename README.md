@@ -4,6 +4,11 @@ In accordance to classical music notes and ragas are the lifeline of any song. F
 Not all artists are gifted note and raga identifiers. Any artist would have to spend a valuable amount of time figuring the raga / notes of a song in order to be able to reproduce it.
 For such artists, this application comes as a rescue. It uses Librosa a Python based library to identify the notes of a song and predict the raga of the song using machine learning models
 
+This project leverages the use of scipy and Librosa library to transform, identify and generate the notes of any song. 
+The application takes a song file, performs Fourier transform and converts it into series of frequency values. These values are then converted to notes using the functions of Librosa library. These notes are used to predict the raga of the song. The raga of the song, the heart of the project is predicted using a supervised machine learning algorithm which is built on a set of songs with unique ragas.
+
+The application is hosted on flask server and apis have been created for different endpoints such as login, dashboard, notes generator, song manipulation and raga identification
+
 ## System Modules and Description
 ### Registration Page:
 Users can register to the application by using the registration/signup page. Here the users can enter their username, email, and password in the form provided.
